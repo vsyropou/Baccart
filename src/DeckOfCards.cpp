@@ -56,13 +56,15 @@ string DeckOfCards::drawCard(){
 void DeckOfCards::initialize(){ makeDeck(); }
 
 void DeckOfCards::makeDeck(){
-  srand (time(NULL)); // TODO: Check better if it is indeed random over time
-  for ( unsigned int cIdx = 0; cIdx < _cardColors.size(); cIdx += 1){ 
-    for ( unsigned int nIdx = 0; nIdx < _cardNames.size(); nIdx += 1){
+  srand (time(NULL)); // Change seed every time you make a new deck
+
+  for ( unsigned int dIdx = 0; dIdx <  _numDecks; dIdx += 1){ 
+    for ( unsigned int cIdx = 0; cIdx < _cardColors.size(); cIdx += 1){ 
+      for ( unsigned int nIdx = 0; nIdx < _cardNames.size(); nIdx += 1){
        _cards.push_back( _cardNames[nIdx] + _cardColors[cIdx] );
+      }
     }
   }
-
   _cards_ptr = &_cards ;
 }
 

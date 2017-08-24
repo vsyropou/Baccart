@@ -10,8 +10,8 @@ int main()
 
 // Configuration //
 
-unsigned int nDecks = 1;
-unsigned int nCards = 26;
+unsigned int nDecks = 2;
+// unsigned int nCards = 52;
 
 //include stuff
 using std::cout; using std::endl;
@@ -21,7 +21,7 @@ using std::tuple; using std::get;
 //Initialize game
 cout<<"\n Initalizing Baccart Game (Get excited)!! \n"<<endl;
 
-DeckOfCards deckofcards(nDecks,nCards);
+DeckOfCards deckofcards(nDecks);
 
 //Sanity checks (TODO:: Comment out)
 tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
@@ -60,3 +60,4 @@ cout<<"Deck size"<<deck->size()<<endl;
 // use const in some places that makes sence.
 // add command line arguments
 // Fix indendation
+// TODO: Check better if it is indeed random over time

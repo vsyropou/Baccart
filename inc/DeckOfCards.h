@@ -28,7 +28,7 @@ protected:
   //members
   unsigned int _numDecks;
   unsigned int _cardsPerDeck;
-  std::array<std::string,2> _cardColors {{"spd","dim"}};
+std::array<std::string,4> _cardColors {{"spd","dim","hrt","clb"}};
   std::array<std::string,13>  _cardNames {{"A","2","3","4","5","6","7","8","9","10","J","Q","K"}};
   std::array<unsigned int,13> _cardVaues {{ 0,  2,  3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 0 , 0 , 0}};
 
