@@ -11,7 +11,7 @@ int main()
 // Configuration //
 
 unsigned int nDecks = 1;
-unsigned int nCards = 5;
+unsigned int nCards = 26;
 
 //include stuff
 using std::cout; using std::endl;
@@ -36,12 +36,17 @@ for (auto it = deck->begin(); it != deck->end(); ++it) {
 int index  = std::distance(deck->begin(), it);
 string val = (*deck)[index];
 
-cout<<index<<endl;
-cout<<val<<endl;
+ cout<<index<<" "<<val<<endl;
     
   }
 
 
+cout<<"Deck size"<<deck->size()<<endl;
+cout<<"\n Now I will draw a card "<<deckofcards.drawCard()<<"\n"<<endl;
+cout<<"Deck size"<<deck->size()<<endl;
+cout<<"\n Now I will draw another card "<<deckofcards.drawCard()<<"\n"<<endl;
+
+cout<<"Deck size"<<deck->size()<<endl;
 
   return 0;
 
@@ -49,5 +54,9 @@ cout<<val<<endl;
 
 
 // TODO::
-//  cards per deck 
-// command line arguments
+// Implement rules
+
+// test clear deck
+// use const in some places that makes sence.
+// add command line arguments
+// Fix indendation
