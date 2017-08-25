@@ -26,7 +26,7 @@ void BaccartGameEngine::initialize(){
 
 }
 
-std::string BaccartGameEngine::playBaccart(){
+void BaccartGameEngine::playBaccart(){
 
   std::cout<<"Beginplayin Baccrat"<<std::endl;
 
@@ -65,13 +65,20 @@ std::string BaccartGameEngine::playBaccart(){
   std::string winner = compareHands(_player,_banker);// ATTENTION: Order of arguments matter!!
 
   std::cout<<"Internal test:"<<std::endl;
-  std::cout<<"\n Player hand sum: "<<evaluateHand(_player)<<std::endl;
+  std::cout<<"\nPlayer hand sum: "<<evaluateHand(_player)<<std::endl;
   std::cout<<   " Banker hand sum: "<<evaluateHand(_banker)<<std::endl;
 
   std::cout<<"Winner is: "<<winner<<std::endl;
+  std::cout<<"GameOver : "<<isGameOver()<<std::endl; 
+
   std::cout<<"End internal test:"<<std::endl;
 
-  return "sks";
+  while (false){
+    //while (!isGameOver()){
+    applyRules();
+      }
+
+  std::cout<<"Game is over!! Do you want to play more? Just rerun the executable :-P"<<std::endl;
 
 }
 
@@ -143,4 +150,14 @@ void BaccartGameEngine::showBankerHand(){
 
 }
 
+bool BaccartGameEngine::isGameOver(){
 
+  bool gameover = (evaluateHand(_player) == 9) or (evaluateHand(_banker) == 9);
+
+  return gameover;
+
+}
+
+void BaccartGameEngine::applyRules(){
+
+}

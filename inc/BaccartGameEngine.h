@@ -15,7 +15,7 @@ class BaccartGameEngine{
 
   //methods
   void initialize();
-  std::string playBaccart();
+  void playBaccart();
   void dumpCardValues();
   void showPlayerHand();
   void showBankerHand();
@@ -36,5 +36,7 @@ protected:
   unsigned int evaluateCard(char card);
   std::string compareHands(std::vector<char>, std::vector<char>);
   int evaluateHand(std::vector<char>);
+  bool isGameOver();
+  void applyRules();
 
 };
