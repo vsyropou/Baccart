@@ -1,52 +1,75 @@
 
+// from std
 #include <iostream>
 #include <vector>
 #include <string>
-#include "inc/DeckOfCards.h"
 #include <tuple>
+
+// local
+#include "inc/DeckOfCards.h"
+#include "inc/BaccartGameEngine.h"
 
 int main()
 {
 
-// Configuration //
+  // Configuration 
 
-unsigned int nDecks = 2;
+  unsigned int nDecks = 2;
 // unsigned int nCards = 52;
 
 //include stuff
 using std::cout; using std::endl;
-using std::vector; using std::string;
+ using std::vector; using std::string;
 using std::tuple; using std::get;
 
 //Initialize game
-cout<<"\n Initalizing Baccart Game (Get excited)!! \n"<<endl;
+ cout<<"\n Initalizing Game (Get excited)!! \n"<<endl;
 
-DeckOfCards deckofcards(nDecks);
+ DeckOfCards deckofcards(nDecks);
 
-//Sanity checks (TODO:: Comment out)
-tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
-unsigned int _nDecks = get<0>(dstats);
-unsigned int _nCards = get<1>(dstats);
-cout<<"\n Game initialization sucessfull: ("<<_nDecks<<" decks and "<<_nCards<< " cards per deck)\n"<<endl;
-
+ BaccartGameEngine gameEngine(deckofcards);
+ 
 //Start Game
-vector<string>* deck = deckofcards.getDeck();
-  
-for (auto it = deck->begin(); it != deck->end(); ++it) {
-int index  = std::distance(deck->begin(), it);
-string val = (*deck)[index];
+ tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
+ cout<<"\n Game initialization sucessfull: ("<<get<0>(dstats)<<" decks and "<<get<1>(dstats)<< " cards per deck)\n"<<endl;
 
- cout<<index<<" "<<val<<endl;
+ gameEngine.dumpCardValues();
+
+ std::string result = gameEngine.playBaccart();
+
+ cout<<"\n Player Hand: ";
+ gameEngine.showPlayerHand();
+
+ cout<<"\n Banker Hand: ";
+ gameEngine.showBankerHand();
+
+ cout<<" \n"<<endl;
+
+// Game over
+
+
+
+// Checks //
+// dump deck
+
+//  vector<string>* deck = deckofcards.getDeck();
+
+// for (auto it = deck->begin(); it != deck->end(); ++it) {
+// int index  = std::distance(deck->begin(), it);
+// string val = (*deck)[index];
+
+//  cout<<index<<" "<<val<<endl;
     
-  }
+//   }
 
+// // draw two cards
+// cout<<"Deck size"<<deck->size()<<endl;
+// cout<<"\n Now I will draw a card "<<deckofcards.drawCard()<<"\n"<<endl;
+// cout<<"Deck size"<<deck->size()<<endl;
+// cout<<"\n Now I will draw another card "<<deckofcards.drawCard()<<"\n"<<endl;
 
-cout<<"Deck size"<<deck->size()<<endl;
-cout<<"\n Now I will draw a card "<<deckofcards.drawCard()<<"\n"<<endl;
-cout<<"Deck size"<<deck->size()<<endl;
-cout<<"\n Now I will draw another card "<<deckofcards.drawCard()<<"\n"<<endl;
+// cout<<"Deck size"<<deck->size()<<endl;
 
-cout<<"Deck size"<<deck->size()<<endl;
 
   return 0;
 
@@ -55,9 +78,9 @@ cout<<"Deck size"<<deck->size()<<endl;
 
 // TODO::
 // Implement rules
-
+// write make file 
+// Check again the card values 
 // test clear deck
 // use const in some places that makes sence.
-// add command line arguments
 // Fix indendation
 // TODO: Check better if it is indeed random over time

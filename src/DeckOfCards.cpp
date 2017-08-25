@@ -72,5 +72,3 @@ void DeckOfCards::newDeck(){
   _cards.clear();
   makeDeck();
 }
-
-
