@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <utility>
 
 #include "DeckOfCards.h"
 
@@ -36,7 +37,8 @@ protected:
   unsigned int evaluateCard(char card);
   std::string compareHands(std::vector<char>, std::vector<char>);
   int evaluateHand(std::vector<char>);
-  bool isGameOver();
+  // bool isGameOver();
   void applyRules();
+  bool advancedBankerDessicion(std::pair<int, unsigned int>);
 
 };

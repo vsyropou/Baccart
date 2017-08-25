@@ -35,7 +35,7 @@ using std::tuple; using std::get;
 
  gameEngine.dumpCardValues();
 
- std::string result = gameEngine.playBaccart();
+ gameEngine.playBaccart();
 
  cout<<"\n Player Hand: ";
  gameEngine.showPlayerHand();
