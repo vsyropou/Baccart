@@ -20,6 +20,10 @@ class BaccartGameEngine{
   void dumpCardValues();
   void showPlayerHand();
   void showBankerHand();
+  int getPlayerSum();
+  int getBankerSum();
+  std::string declareWinner();
+
 
   //destructor
   ~BaccartGameEngine();

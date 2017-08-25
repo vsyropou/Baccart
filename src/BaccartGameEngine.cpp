@@ -39,9 +39,10 @@ void BaccartGameEngine::playBaccart(){
   std::string bcard2 = _cards.drawCard();
 
   // dump status // TODO:: Make this into a function that dumps hands and sums
-  std::cout<<"\n\n Player hand: "<<pcard1<<" "<<pcard2<<" "<<std::endl;
-  std::cout<<"Banker hand: "<<bcard1<<" "<<bcard2<<" "<<std::endl;
-  std::cout<<" /n "<<std::endl;
+  std::cout<<"\nInternal test:"<<std::endl;
+  std::cout<<"Player natural hand: "<<pcard1<<" "<<pcard2<<" "<<std::endl;
+  std::cout<<"Banker natural hand: "<<bcard1<<" "<<bcard2<<" "<<std::endl;
+  std::cout<<" \n "<<std::endl;
   
   char p1c1 = pcard1.front();
   char p1c2 = pcard2.front();
@@ -55,21 +56,16 @@ void BaccartGameEngine::playBaccart(){
   _banker.emplace_back(p2c1);
   _banker.emplace_back(p2c2);
 
-
-  std::string winner = compareHands(_player,_banker);// ATTENTION: Order of arguments matter!!
-  std::cout<<"Internal test:"<<std::endl;
   std::cout<<"\nPlayer hand sum: "<<evaluateHand(_player)<<std::endl;
-  std::cout<<   " Banker hand sum: "<<evaluateHand(_banker)<<std::endl;
-
-  std::cout<<"Winner is: "<<winner<<std::endl;
-  // std::cout<<"GameOver : "<<isGameOver()<<std::endl; 
-
-  std::cout<<"End internal test:"<<std::endl;
+  std::cout<<  "Banker hand sum: "<<evaluateHand(_banker)<<std::endl;
 
   applyRules();
-    
 
-  std::cout<<"Game is over!! Do you want to play more? Just rerun the executable :-P"<<std::endl;
+  std::string winner = compareHands(_player,_banker);// ATTENTION: Order of arguments matter!!
+
+  std::cout<<"Winner is: "<<winner<<std::endl;
+
+  std::cout<<"End internal test:"<<std::endl;
 
 }
 
@@ -141,12 +137,22 @@ void BaccartGameEngine::showBankerHand(){
 
 }
 
+
+int BaccartGameEngine::getPlayerSum(){ return evaluateHand(_player); }
+
+int BaccartGameEngine::getBankerSum(){ return evaluateHand(_banker); }
+
+std::string BaccartGameEngine::declareWinner(){ 
+  return (evaluateHand(_player)>evaluateHand(_banker)) ? "PLAYER" : "BANKER"; 
+}
+
 void BaccartGameEngine::applyRules(){
   
   auto playerDrawDecission = [this](std::vector<char> hand){ return evaluateHand(hand) <= 5;};
 
   // Dessice who and draws a third card
   bool playerDraws = playerDrawDecission(_player);
+  std::cout<<"player draws third card"<<" "<<playerDraws<<std::endl;
   if ( playerDraws ){
 
     char playerCard = _cards.drawCard().front();
@@ -159,13 +165,15 @@ void BaccartGameEngine::applyRules(){
     action.second = evaluateHand(_banker);
     
     bool bankerDraws = advancedBankerDessicion(action);
+    std::cout<<"banker draws third card"<<" "<<bankerDraws<<std::endl;
+    if ( bankerDraws ){ _player.emplace_back(_cards.drawCard().front());}
 
-    std::cout<<"/n Card:"<<playerCard<<std::endl;
-    std::cout<<"evalCard:"<<evaluateCard(playerCard)<<std::endl;
-    std::cout<<"evalHand:"<<evaluateHand(_banker)<<std::endl;
-    std::cout<<"evalCard test:"<<action.first<<std::endl;
-    std::cout<<"evalHand test:"<<action.second<<std::endl;
-    std::cout<<"test laction:"<<bankerDraws<<std::endl;
+    // std::cout<<"/n Card:"<<playerCard<<std::endl;
+    // std::cout<<"evalCard:"<<evaluateCard(playerCard)<<std::endl;
+    // std::cout<<"evalHand:"<<evaluateHand(_banker)<<std::endl;
+    // std::cout<<"evalCard test:"<<action.first<<std::endl;
+    // std::cout<<"evalHand test:"<<action.second<<std::endl;
+    // std::cout<<"test laction:"<<bankerDraws<<std::endl;
 
   }
   else {
@@ -174,8 +182,12 @@ void BaccartGameEngine::applyRules(){
     }
   }
 
+  std::cout<<"\nPlayer hand sum: "<<evaluateHand(_player)<<std::endl;
+  std::cout<<  "Banker hand sum: "<<evaluateHand(_banker)<<std::endl;
 
-  std::cout<<"Draw dession"<<" "<<playerDraws<<std::endl;
+  std::cout<<"player draws third card"<<" "<<playerDraws<<std::endl;
+  std::cout<<   "End third card hand test: "<<std::endl;
+
 
 
 }
