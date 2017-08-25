@@ -77,9 +77,10 @@ using std::tuple; using std::get;
 
 
 // TODO::
-// Implement rules
+// Implement rules and game
 // write make file 
-// Check again the card values 
+// Check again the card values (or point out to gli that these are the valeus I used )
+
 // test clear deck
 // use const in some places that makes sence.
 // Fix indendation
