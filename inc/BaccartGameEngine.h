@@ -42,5 +42,6 @@ protected:
   int evaluateHand(std::vector<char>);
   void applyRules();
   bool advancedBankerDessicion(std::pair<int, unsigned int>);
+  void prepNewGame();
 
 };

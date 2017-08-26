@@ -1,9 +1,8 @@
 
 // from std
 #include <iostream>
-#include <vector>
-#include <string>
-#include <tuple>
+#include <string.h>
+#include <stdio.h>
 
 // local
 #include "inc/DeckOfCards.h"
@@ -11,12 +10,24 @@
 
 using namespace std;
 
-int main()
+int main( int argc , char* argv[] )
 {
 
   // Configuration 
   unsigned int nDecks = 2;
-  bool developerMode = true;
+  bool developerMode;
+
+   cout<<argv[0]<<endl;
+  if ( not argc == 1 ){
+    std::cerr << "Usage: " << argv[0] << " NAME" << std::endl;
+    /* "Usage messages" are a conventional way of telling the user
+         * how to run a program if they enter the command incorrectly.
+         */
+  }
+  else{
+    if ( strcmp(argv[0],"--devMode") == 0){ developerMode = true;}
+    else{developerMode = false;}
+  }
 
 
   //Initialize game
@@ -29,21 +40,38 @@ int main()
   tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
   cout<<"\n Game initialization sucessfull: ("<<get<0>(dstats)<<" decks and "<<get<1>(dstats)<< " cards per deck)\n"<<endl;
  
-  //  gameEngine.dumpCardValues();
+    if ( developerMode ) {
+        cout<<"\n These are the card values"<<endl;
+	gameEngine.dumpCardValues();}
 
   //Start Game
+  cout<<"\n Press enter to start game.\n"<<endl;
+  std::string line;
+  std::getline( std::cin, line );
+  unsigned int cnt = 1;
+  while( line.empty() ){
 
-  gameEngine.playBaccart();
+    gameEngine.playBaccart();
 
-  cout<<"\n Player Hand: ";
-  gameEngine.showPlayerHand();
-  cout<<"  sum = "<<gameEngine.getPlayerSum();
+    cout<<"\n --- Game number "<<cnt<<" ---"<<endl;
+    cout<<"\n Player Hand: ";
+    gameEngine.showPlayerHand();
+    cout<<"  sum = "<<gameEngine.getPlayerSum();
 
-  cout<<"\n Banker Hand: ";
-  gameEngine.showBankerHand();
-  cout<<"  sum = "<<gameEngine.getBankerSum()<<endl;
-  gameEngine.declareWinner();
-  std::cout<<"\n Game is over!! Do you want to play more? Just rerun the executable :-P\n"<<std::endl;
+    cout<<"\n Banker Hand: ";
+    gameEngine.showBankerHand();
+    cout<<"  sum = "<<gameEngine.getBankerSum()<<endl;
+    gameEngine.declareWinner();
+
+    std::cout<<"\n Game is over!! "
+	     <<"Do you want to play more? "
+	     <<"Just press enter. "
+	     <<"Or type anything else to exit"<<std::endl;
+    std::getline( std::cin, line );
+
+    cnt +=1;
+  
+  }
 
 // Game over
 

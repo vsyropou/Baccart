@@ -29,6 +29,11 @@ void BaccartGameEngine::initialize(){
 }
 
 void BaccartGameEngine::playBaccart(){
+  
+  if ( _isGameOver ){ 
+    prepNewGame();
+    _isGameOver = false;
+  }
 
   std::cout<<"\n-----------------------------"<<std::endl;
   std::cout<<"----- Begin Baccrat Game ----"<<std::endl;
@@ -157,6 +162,11 @@ bool BaccartGameEngine::advancedBankerDessicion(std::pair<int,unsigned int> acti
 
   return case1() or case2() or case3() or case4() or case5();
 
+}
+
+void BaccartGameEngine::prepNewGame(){
+  _player.clear(); 
+  _banker.clear();
 }
 
 void BaccartGameEngine::dumpCardValues(){
