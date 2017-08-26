@@ -9,16 +9,14 @@
 #include "inc/DeckOfCards.h"
 #include "inc/BaccartGameEngine.h"
 
+using namespace std;
+
 int main()
 {
 
   // Configuration 
   unsigned int nDecks = 2;
 
-  //include stuff
-  using std::cout; using std::endl;
-  using std::vector; using std::string;
-  using std::tuple; using std::get;
 
   //Initialize game
   cout<<"\n Initalizing Game (Get excited)!! \n"<<endl;
@@ -26,12 +24,13 @@ int main()
   DeckOfCards deckofcards(nDecks);
 
   BaccartGameEngine gameEngine(deckofcards);
- 
-  //Start Game
+
   tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
   cout<<"\n Game initialization sucessfull: ("<<get<0>(dstats)<<" decks and "<<get<1>(dstats)<< " cards per deck)\n"<<endl;
-
+ 
   //  gameEngine.dumpCardValues();
+
+  //Start Game
 
   gameEngine.playBaccart();
 
@@ -47,29 +46,6 @@ int main()
   std::cout<<"/n Game is over!! Do you want to play more? Just rerun the executable :-P/n"<<std::endl;
 
 // Game over
-
-
-
-// Checks //
-// dump deck
-
-//  vector<string>* deck = deckofcards.getDeck();
-
-// for (auto it = deck->begin(); it != deck->end(); ++it) {
-// int index  = std::distance(deck->begin(), it);
-// string val = (*deck)[index];
-
-//  cout<<index<<" "<<val<<endl;
-    
-//   }
-
-// // draw two cards
-// cout<<"Deck size"<<deck->size()<<endl;
-// cout<<"\n Now I will draw a card "<<deckofcards.drawCard()<<"\n"<<endl;
-// cout<<"Deck size"<<deck->size()<<endl;
-// cout<<"\n Now I will draw another card "<<deckofcards.drawCard()<<"\n"<<endl;
-
-// cout<<"Deck size"<<deck->size()<<endl;
 
 
   return 0;
