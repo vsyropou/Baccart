@@ -10,9 +10,7 @@ class BaccartGameEngine{
  public: // Interace //
   
   //constructors
-  BaccartGameEngine( DeckOfCards cards );
-  
-  // members
+  BaccartGameEngine( DeckOfCards cards, bool developerMode );
 
   //methods
   void initialize();
@@ -22,8 +20,7 @@ class BaccartGameEngine{
   void showBankerHand();
   int getPlayerSum();
   int getBankerSum();
-  std::string declareWinner();
-
+  void declareWinner();
 
   //destructor
   ~BaccartGameEngine();
@@ -33,6 +30,8 @@ protected:
   // members
   DeckOfCards _cards;
   std::map<char,int> _cardValues;
+  bool _developerMode;
+  bool _isGameOver = false;
 
   std::vector<char> _player;
   std::vector<char> _banker;
@@ -41,7 +40,6 @@ protected:
   unsigned int evaluateCard(char card);
   std::string compareHands(std::vector<char>, std::vector<char>);
   int evaluateHand(std::vector<char>);
-  // bool isGameOver();
   void applyRules();
   bool advancedBankerDessicion(std::pair<int, unsigned int>);
 

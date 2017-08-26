@@ -16,6 +16,7 @@ int main()
 
   // Configuration 
   unsigned int nDecks = 2;
+  bool developerMode = true;
 
 
   //Initialize game
@@ -23,7 +24,7 @@ int main()
 
   DeckOfCards deckofcards(nDecks);
 
-  BaccartGameEngine gameEngine(deckofcards);
+  BaccartGameEngine gameEngine(deckofcards,developerMode);
 
   tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
   cout<<"\n Game initialization sucessfull: ("<<get<0>(dstats)<<" decks and "<<get<1>(dstats)<< " cards per deck)\n"<<endl;
@@ -41,9 +42,8 @@ int main()
   cout<<"\n Banker Hand: ";
   gameEngine.showBankerHand();
   cout<<"  sum = "<<gameEngine.getBankerSum()<<endl;
-  cout<<gameEngine.declareWinner()<<" WINS\n"<<endl;
-
-  std::cout<<"/n Game is over!! Do you want to play more? Just rerun the executable :-P/n"<<std::endl;
+  gameEngine.declareWinner();
+  std::cout<<"\n Game is over!! Do you want to play more? Just rerun the executable :-P\n"<<std::endl;
 
 // Game over
 

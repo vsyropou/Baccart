@@ -1,11 +1,12 @@
-#include "../inc/BaccartGameEngine.h"
 #include <iostream>
 #include <utility>
 
-// Interface //
+#include "../inc/BaccartGameEngine.h"
 
 //constructors
-BaccartGameEngine::BaccartGameEngine( DeckOfCards cards ): _cards(cards){ 
+BaccartGameEngine::BaccartGameEngine( DeckOfCards cards, bool developerMode ): 
+  _cards(cards),
+  _developerMode(developerMode){ 
   initialize(); }
 
 BaccartGameEngine::~BaccartGameEngine(){}
@@ -15,7 +16,7 @@ BaccartGameEngine::~BaccartGameEngine(){}
 void BaccartGameEngine::initialize(){
 
   // set card values
-  // Not the most elgant way ...
+  //  Not the most elgant way ...
   _cardValues['10'] = 0; _cardValues['J'] = 0;
   _cardValues['Q'] = 0;  _cardValues['K'] = 0;
 
@@ -29,7 +30,9 @@ void BaccartGameEngine::initialize(){
 
 void BaccartGameEngine::playBaccart(){
 
-  std::cout<<"Beginplayin Baccrat"<<std::endl;
+  std::cout<<"\n-----------------------------"<<std::endl;
+  std::cout<<"----- Begin Baccrat Game ----"<<std::endl;
+  std::cout<<"-----------------------------\n"<<std::endl;
 
   // start by dealing two cards each 
   std::string pcard1 = _cards.drawCard();
@@ -38,12 +41,6 @@ void BaccartGameEngine::playBaccart(){
   std::string bcard1 = _cards.drawCard();
   std::string bcard2 = _cards.drawCard();
 
-  // dump status // TODO:: Make this into a function that dumps hands and sums
-  std::cout<<"\nInternal test:"<<std::endl;
-  std::cout<<"Player natural hand: "<<pcard1<<" "<<pcard2<<" "<<std::endl;
-  std::cout<<"Banker natural hand: "<<bcard1<<" "<<bcard2<<" "<<std::endl;
-  std::cout<<" \n "<<std::endl;
-  
   char p1c1 = pcard1.front();
   char p1c2 = pcard2.front();
 
@@ -56,27 +53,23 @@ void BaccartGameEngine::playBaccart(){
   _banker.emplace_back(p2c1);
   _banker.emplace_back(p2c2);
 
-  std::cout<<"\nPlayer hand sum: "<<evaluateHand(_player)<<std::endl;
-  std::cout<<  "Banker hand sum: "<<evaluateHand(_banker)<<std::endl;
+  if ( _developerMode ){// dump natural hands
+    std::cout<<"\n --Developer mode info--"<<std::endl;
+    std::cout<<"Player natural hand: "<<pcard1<<" "<<pcard2<<" "<<std::endl;
+    std::cout<<"Banker natural hand: "<<bcard1<<" "<<bcard2<<" "<<std::endl;
+    std::cout<<"Player hand sum: "<<getPlayerSum()<<std::endl;
+    std::cout<<"Banker hand sum: "<<getBankerSum()<<std::endl;
+  }
 
+  // draw a third card ?
   applyRules();
 
-  std::string winner = compareHands(_player,_banker);// ATTENTION: Order of arguments matter!!
-
-  std::cout<<"Winner is: "<<winner<<std::endl;
-
-  std::cout<<"End internal test:"<<std::endl;
+  if ( _developerMode ){  std::cout<<"\n --End developer mode info--"<<std::endl;}
+  
+  _isGameOver = true;
 
 }
 
-void BaccartGameEngine::dumpCardValues(){
-  std::cout<<"\n Card Values are:"<<std::endl;
-  for ( auto it = _cardValues.begin(); it != _cardValues.end(); it++ )
-    {
-      std::cout << it->first  << ':'
-		<< it->second <<std::endl ;
-    }
-} 
 
 unsigned int BaccartGameEngine::evaluateCard(char card){
 
@@ -86,63 +79,26 @@ unsigned int BaccartGameEngine::evaluateCard(char card){
 
 int BaccartGameEngine::evaluateHand(std::vector<char> hand){
 
-  // std::cout<<" checking summing function"<<std::endl;
-  // std::cout<<hand[0]<<" "<<hand[1]<<std::endl;
-
   int sum = 0;
   for (unsigned int i = 0; i < hand.size(); ++i){
 
     int handValue = evaluateCard(hand[i]); 
     
-    // std::cout<<"Inside for sum:"<<sum<<" value:"<<handValue<<std::endl;
-    
     if ( (sum + handValue) >= 10){
       sum += (handValue - 10 + 1);
-      // std::cout<<"Inside if:"<<sum<<" arg:"<<(sum + handValue - 10 + 1)<<std::endl;
     }
     else{
       sum += handValue;
-      // std::cout<<"Inside else:"<<sum<<" arg:"<<(sum + handValue - 10 + 1)<<std::endl;
+
     }
   }
 
-  // std::cout<<"Outside for sum:"<<sum<<std::endl; 
   return sum;
 
 }
 
-
 std::string BaccartGameEngine::compareHands(std::vector<char> player, std::vector<char> banker){
 
-  int playerSum = evaluateHand(player);
-  int bankerSum = evaluateHand(banker);
-
-  std::string winner = (playerSum>bankerSum) ? "PLAYER" : "BANKER"; 
-
-  return winner;
-
-}
-
-void BaccartGameEngine::showPlayerHand(){
-
-  for (unsigned int i = 0; i < _player.size(); ++i)
-    std::cout << _player[i] << ' ';
-
-}
-
-void BaccartGameEngine::showBankerHand(){
-
-  for (unsigned int i = 0; i < _banker.size(); ++i)
-    std::cout << _banker[i] << ' ';
-
-}
-
-
-int BaccartGameEngine::getPlayerSum(){ return evaluateHand(_player); }
-
-int BaccartGameEngine::getBankerSum(){ return evaluateHand(_banker); }
-
-std::string BaccartGameEngine::declareWinner(){ 
   return (evaluateHand(_player)>evaluateHand(_banker)) ? "PLAYER" : "BANKER"; 
 }
 
@@ -188,8 +144,6 @@ void BaccartGameEngine::applyRules(){
   std::cout<<"player draws third card"<<" "<<playerDraws<<std::endl;
   std::cout<<   "End third card hand test: "<<std::endl;
 
-
-
 }
 
 
@@ -205,12 +159,42 @@ bool BaccartGameEngine::advancedBankerDessicion(std::pair<int,unsigned int> acti
 
 }
 
+void BaccartGameEngine::dumpCardValues(){
+  std::cout<<"\n Card Values are:"<<std::endl;
+  for ( auto it = _cardValues.begin(); it != _cardValues.end(); it++ )
+    {
+      std::cout << it->first  << ':'
+		<< it->second <<std::endl ;
+    }
+} 
 
+void BaccartGameEngine::showPlayerHand(){
 
-// bool BaccartGameEngine::isGameOver(){
+  for (unsigned int i = 0; i < _player.size(); ++i)
+    std::cout << _player[i] << ' ';
 
-//   bool gameover = (evaluateHand(_player) == 9) or (evaluateHand(_banker) == 9);
+}
 
-//   return gameover;
+void BaccartGameEngine::showBankerHand(){
 
-// }
+  for (unsigned int i = 0; i < _banker.size(); ++i)
+    std::cout << _banker[i] << ' ';
+
+}
+
+int BaccartGameEngine::getPlayerSum(){ return evaluateHand(_player); }
+
+int BaccartGameEngine::getBankerSum(){ return evaluateHand(_banker); }
+
+void BaccartGameEngine::declareWinner(){
+
+  if ( _isGameOver ){
+    if ( evaluateHand(_player) == evaluateHand(_banker) ) 
+      { std::cout<<"TIE"<<std::endl;}
+    else{
+      std::string wnr = (evaluateHand(_player)>evaluateHand(_banker)) ? "PLAYER" : "BANKER";
+      std::cout<<"Winner is "<<wnr<<std::endl; }
+  }
+  else {std::cout<<"Cannot declare winner, game is not over yet."<<std::endl; }
+
+}

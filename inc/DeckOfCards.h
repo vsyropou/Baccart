@@ -3,15 +3,15 @@
 #include <string>
 #include <array>
 
-
 #ifndef DECKOFCARDS
 #define DECKOFCARDS
 
 class DeckOfCards{
 
  public: // Interace //
+
   //constructors
-  inline DeckOfCards() {} // Default constructor
+  DeckOfCards() {} // Default constructor
   DeckOfCards(unsigned int numDecks = 1, unsigned int cardsPerDeck = 52);
 
   //methods
@@ -32,12 +32,11 @@ protected:
   //members
   unsigned int _numDecks;
   unsigned int _cardsPerDeck;
-std::array<std::string,4> _cardColors {{"spd","dim","hrt","clb"}};
-  std::array<std::string,13>  _cardNames  {{"A","2","3","4","5","6","7","8","9","10","J","Q","K"}};
-std::array<unsigned int,13> _cardValues {{ 0,  2,  3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 0 , 0 , 0}}; // This should be better moved to the game engince class
+  std::array<std::string,4>  _cardColors {{"spd","dim","hrt","clb"}};
+  std::array<std::string,13> _cardNames  {{"A","2","3","4","5","6","7","8","9","10","J","Q","K"}};
 
   std::vector<std::string>* _cards_ptr;
-  std::vector<std::string> _cards;
+  std::vector<std::string>  _cards;
 
 };
 
