@@ -17,7 +17,7 @@ void BaccartGameEngine::initialize(){
 
   // set card values
   //  Not the most elgant way ...
-  _cardValues['10'] = 0; _cardValues['J'] = 0;
+  _cardValues['0'] = 0; _cardValues['J'] = 0;
   _cardValues['Q'] = 0;  _cardValues['K'] = 0;
 
   _cardValues['A'] = 1;
@@ -171,8 +171,8 @@ void BaccartGameEngine::dumpCardValues(){
 void BaccartGameEngine::showPlayerHand(){
 
   for (unsigned int i = 0; i < _player.size(); ++i)
-    std::cout << _player[i] << ' ';
-
+    std::cout <<_player[i] << ' ';
+ 
 }
 
 void BaccartGameEngine::showBankerHand(){

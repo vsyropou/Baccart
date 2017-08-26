@@ -56,6 +56,7 @@ int main()
 // TODO::
 // Test rules and game
 // Fix issue with 10 as char in the charcter values
+//       //  auto show = [](char crd){ if (crd=='0'){ return "10";} else {return static_cast<std::string>(crd);} }
 // write make file 
 // Check again the card values (or point out to gli that these are the valeus I used )
 

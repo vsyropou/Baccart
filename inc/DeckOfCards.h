@@ -33,7 +33,7 @@ protected:
   unsigned int _numDecks;
   unsigned int _cardsPerDeck;
   std::array<std::string,4>  _cardColors {{"spd","dim","hrt","clb"}};
-  std::array<std::string,13> _cardNames  {{"A","2","3","4","5","6","7","8","9","10","J","Q","K"}};
+  std::array<std::string,13> _cardNames  {{"A","2","3","4","5","6","7","8","9","0","J","Q","K"}};
 
   std::vector<std::string>* _cards_ptr;
   std::vector<std::string>  _cards;
