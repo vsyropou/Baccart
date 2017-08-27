@@ -6,18 +6,17 @@
 using namespace std;
 
 //constructors
-
 DeckOfCards::DeckOfCards(unsigned int numDecks, unsigned int cardsPerDeck):
   _numDecks(numDecks),
   _cardsPerDeck(cardsPerDeck){
 
   initialize();
+
 }
 
 DeckOfCards::~DeckOfCards(){}
 
 //methods
-
 void DeckOfCards::initialize(){ makeDeck(); }
 
 void DeckOfCards::makeDeck(){
@@ -44,7 +43,7 @@ string DeckOfCards::drawCard(){
   // But the pseudo randomenss effect is the same.
 
   if ( _cards_ptr->empty() ){ 
-    cout<<"/n Deck is finished. Have a drink while waiting for new deck..../n"<<endl;
+    cout<<"\n INFO:: Deck is finished. Have a drink while waiting for new deck....\n"<<endl;
     newDeck(); }
 
   unsigned int idraw = rand() % _cards_ptr->size() + 0; // throw a random number
@@ -56,7 +55,6 @@ string DeckOfCards::drawCard(){
   // Note: Do not use vectors for this again, pop_back does not return the poped value;
 
   return rcrd;
-
 }
 
 string DeckOfCards::getSpecificCard(){

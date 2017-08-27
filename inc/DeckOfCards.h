@@ -25,7 +25,6 @@ class DeckOfCards{
   inline void dumpCardNames() { for( auto it = _cardNames.begin(); it != _cardNames.end(); it++){ cout<<" "<<*it;}  };
   inline void dumpCardColors() { for( auto it = _cardColors.begin(); it != _cardColors.end(); it++){ cout<<" "<<*it;}  };
   
-
   //destructor
   ~DeckOfCards();
 

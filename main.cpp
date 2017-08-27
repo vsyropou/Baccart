@@ -26,9 +26,7 @@ int main()
 
   BaccartGameEngine gameEngine(deckofcards,developerMode,testRulesMode);
 
-    if ( developerMode ) {
-        cout<<"\n These are the card values"<<endl;
-	gameEngine.dumpCardValues();}
+    if ( developerMode ) {gameEngine.dumpCardValues();}
 
   //Start Game
     cout<<"\n Press enter to start game.\n>>>";
@@ -73,11 +71,6 @@ int main()
 
 
 // TODO::
-// test end of deck card
-// Fix issue with 10 as char in the charcter values
-//       //  auto show = [](char crd){ if (crd=='0'){ return "10";} else {return static_cast<std::string>(crd);} }
-//       Check again the card values (or point out to gli that these are the valeus I used )
-// fix seed option
 
 // use const in some declarations that makes sence.
 // Check better if it is indeed random over time, do histograms etc...

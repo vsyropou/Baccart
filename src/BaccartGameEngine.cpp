@@ -9,24 +9,34 @@ BaccartGameEngine::BaccartGameEngine( DeckOfCards cards, bool developerMode, boo
   _cards(cards),
   _developerMode(developerMode),
   _testRulesMode(testRulesMode){ 
-  initialize(); }
+
+  initialize(); 
+
+}
 
 BaccartGameEngine::~BaccartGameEngine(){}
 
 //methods
-
 void BaccartGameEngine::initialize(){
 
   // set card values
   //  Not the most elgant way ...
-  _cardValues['0'] = 0; _cardValues['J'] = 0;
-  _cardValues['Q'] = 0;  _cardValues['K'] = 0;
+  _cardValues['0'] = 0; _cardValues['J'] = 0; _cardValues['Q'] = 0;
+  _cardValues['K'] = 0;
 
-  _cardValues['A'] = 1;
-  _cardValues['2'] = 2; _cardValues['6'] = 6;
-  _cardValues['3'] = 3; _cardValues['7'] = 7;
-  _cardValues['4'] = 4; _cardValues['8'] = 8;
-  _cardValues['5'] = 5; _cardValues['9'] = 9;
+  _cardValues['A'] = 1; _cardValues['2'] = 2; _cardValues['6'] = 6;
+  _cardValues['3'] = 3; _cardValues['7'] = 7; _cardValues['4'] = 4; 
+  _cardValues['8'] = 8; _cardValues['5'] = 5; _cardValues['9'] = 9;
+
+  // set card names (as we want them to apper for the user)
+  // TODO:: This can be avoided if the _carValues keys where 
+  //        strings instead of char.
+  _cardNames['0'] = "10"; _cardNames['J'] = "J"; _cardNames['Q'] = "Q";  
+  _cardNames['K'] = "K";
+
+  _cardNames['A'] = "A"; _cardNames['2'] = "2"; _cardNames['6'] = "6";
+  _cardNames['3'] = "3"; _cardNames['7'] = "7"; _cardNames['4'] = "4"; 
+  _cardNames['8'] = "8"; _cardNames['5'] = "5"; _cardNames['9'] = "9";
 
   tuple<unsigned int,unsigned int> dstats = this->_cards.getDeckStats();
   cout<<"\n Game initialization sucessfull: ("
@@ -81,7 +91,6 @@ void BaccartGameEngine::playBaccart(){
   auto stands = [this](vector<char> hnd){return (evaluateHand(hnd)==8 or evaluateHand(hnd)==9);};
 
   if ( not (stands(_player) and stands(_banker)) ){
-    cout<<" wtf"<<endl;
 	applyRules();
       
        }
@@ -90,8 +99,6 @@ _isGameOver = true;
 
 }
             
-
-
 unsigned int BaccartGameEngine::evaluateCard(char card){
 
   return _cardValues[card];
@@ -155,7 +162,6 @@ void BaccartGameEngine::applyRules(){ // Dessice who draws a third card
   }
 }
 
-
 bool BaccartGameEngine::advancedBankerDessicion(pair<int,unsigned int> action){
 
   auto case1 = [action](){return (action.first>=2 and action.first<=3 and action.second<=4) ;};
@@ -174,27 +180,22 @@ void BaccartGameEngine::prepNewGame(){
 }
 
 void BaccartGameEngine::dumpCardValues(){
-  cout<<"\n Card Values are (Carefull 10 is maped to 0):"<<endl;
+  cout<<"\n Card Values are (Carefull 10 is maped to 0 internally!!):"<<endl;
   for ( auto it = _cardValues.begin(); it != _cardValues.end(); it++ )
     {
-      cout << it->first  << ':'
-		<< it->second <<endl ;
+      cout<<"  "<<it->first << ':' <<it->second<<" ,";
     }
+  cout<<" "<<endl;
 } 
 
-void BaccartGameEngine::showPlayerHand(){
-
-  for (unsigned int i = 0; i < _player.size(); ++i)
-    cout <<_player[i] << ' ';
- 
+void BaccartGameEngine::showHand(vector<char> hand){
+  for (auto it = hand.begin(); it != hand.end(); it++) 
+    cout<<_cardNames[*it]<<' ';
 }
 
-void BaccartGameEngine::showBankerHand(){
+void BaccartGameEngine::showPlayerHand(){ showHand(_player); }
 
-  for (unsigned int i = 0; i < _banker.size(); ++i)
-    cout << _banker[i] << ' ';
-
-}
+void BaccartGameEngine::showBankerHand(){ showHand(_banker); }
 
 int BaccartGameEngine::getPlayerSum(){ return evaluateHand(_player); }
 

@@ -32,6 +32,7 @@ protected:
   // members
   DeckOfCards _cards;
   map<char,int> _cardValues;
+  map<char,string> _cardNames;
   bool _developerMode;
   bool _testRulesMode;
   bool _isGameOver = false;
@@ -45,5 +46,6 @@ protected:
   void applyRules();
   bool advancedBankerDessicion(pair<int, unsigned int>);
   void prepNewGame();
+  void showHand(vector<char>);
 
 };
