@@ -89,13 +89,8 @@ int BaccartGameEngine::evaluateHand(std::vector<char> hand){
 
     int handValue = evaluateCard(hand[i]); 
     
-    if ( (sum + handValue) >= 10){
-      sum += (handValue - 10 + 1);
-    }
-    else{
-      sum += handValue;
-
-    }
+    if ( (sum + handValue) >= 10){ sum += (handValue - 10 + 1);}
+    else                         { sum += handValue;}
   }
 
   return sum;

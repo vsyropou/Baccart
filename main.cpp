@@ -2,7 +2,6 @@
 // from std
 #include <iostream>
 #include <string.h>
-#include <stdio.h>
 
 // local
 #include "inc/DeckOfCards.h"
@@ -10,25 +9,12 @@
 
 using namespace std;
 
-int main( int argc , char* argv[] )
+int main()
 {
 
   // Configuration 
   unsigned int nDecks = 2;
-  bool developerMode;
-
-   cout<<argv[0]<<endl;
-  if ( not argc == 1 ){
-    std::cerr << "Usage: " << argv[0] << " NAME" << std::endl;
-    /* "Usage messages" are a conventional way of telling the user
-         * how to run a program if they enter the command incorrectly.
-         */
-  }
-  else{
-    if ( strcmp(argv[0],"--devMode") == 0){ developerMode = true;}
-    else{developerMode = false;}
-  }
-
+  bool developerMode = true;
 
   //Initialize game
   cout<<"\n Initalizing Game (Get excited)!! \n"<<endl;
