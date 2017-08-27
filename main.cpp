@@ -12,34 +12,39 @@ using namespace std;
 int main()
 {
 
-  // Configuration 
-  unsigned int nDecks = 2;
-  bool developerMode = true;
+  // Configuration
+  // TODO:: Make these into comand line arguments.
+  unsigned int nDecks = 1;
+  bool developerMode = true; // here you get more info throught the game.
+  bool testRulesMode = false; // if true you get to choose cards that card drawn 
+                              // useful for cheking the rules of the game
 
   //Initialize game
   cout<<"\n Initalizing Game (Get excited)!! \n"<<endl;
 
   DeckOfCards deckofcards(nDecks);
 
-  BaccartGameEngine gameEngine(deckofcards,developerMode);
+  BaccartGameEngine gameEngine(deckofcards,developerMode,testRulesMode);
 
-  tuple<unsigned int,unsigned int> dstats = deckofcards.getDeckStats();
-  cout<<"\n Game initialization sucessfull: ("<<get<0>(dstats)<<" decks and "<<get<1>(dstats)<< " cards per deck)\n"<<endl;
- 
     if ( developerMode ) {
         cout<<"\n These are the card values"<<endl;
 	gameEngine.dumpCardValues();}
 
   //Start Game
-  cout<<"\n Press enter to start game.\n"<<endl;
+    cout<<"\n Press enter to start game.\n>>>";
   std::string line;
   std::getline( std::cin, line );
   unsigned int cnt = 1;
+
+  std::cout<<"\n-----------------------------"
+	   <<"\n----- Begin Baccrat Game ----"
+	   <<"\n-----------------------------\n"<<std::endl;
+
   while( line.empty() ){
+    cout<<"\n --- Game number "<<cnt<<" ---"<<endl;
 
     gameEngine.playBaccart();
 
-    cout<<"\n --- Game number "<<cnt<<" ---"<<endl;
     cout<<"\n Player Hand: ";
     gameEngine.showPlayerHand();
     cout<<"  sum = "<<gameEngine.getPlayerSum();
@@ -68,13 +73,12 @@ int main()
 
 
 // TODO::
-// Test rules and game
+// test end of deck card
 // Fix issue with 10 as char in the charcter values
 //       //  auto show = [](char crd){ if (crd=='0'){ return "10";} else {return static_cast<std::string>(crd);} }
-// write make file 
-// Check again the card values (or point out to gli that these are the valeus I used )
+//       Check again the card values (or point out to gli that these are the valeus I used )
+// fix seed option
 
-
-// test clear deck
-// use const in some places that makes sence.
+// use const in some declarations that makes sence.
 // Check better if it is indeed random over time, do histograms etc...
+// use namepsaces in GameEngin and remove all the std::

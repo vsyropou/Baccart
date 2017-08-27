@@ -1,9 +1,7 @@
 
-#include "../inc/DeckOfCards.h"
-#include <iostream>
 #include <tuple>
-#include <stdlib.h>
-#include <time.h> 
+
+#include "../inc/DeckOfCards.h"
 
 using namespace std;
 
@@ -46,7 +44,7 @@ string DeckOfCards::drawCard(){
   // But the pseudo randomenss effect is the same.
 
   if ( _cards_ptr->empty() ){ 
-    cout<<"Deck is finished. Have a drink while waiting for new deck...."<<endl;
+    cout<<"/n Deck is finished. Have a drink while waiting for new deck..../n"<<endl;
     newDeck(); }
 
   unsigned int idraw = rand() % _cards_ptr->size() + 0; // throw a random number
@@ -61,9 +59,26 @@ string DeckOfCards::drawCard(){
 
 }
 
+string DeckOfCards::getSpecificCard(){
+  // This is for testing the rules of the game faster.
+
+  cout<<"\n Type a specific card to be draw from the deck (Carefull 10 is mapped to 0).\n"<<endl;
+  cout<<"  Format of faces is: ";
+  dumpCardNames();
+  cout<<"\n  Format of colors is: ";
+  dumpCardColors();
+  cout<<"\n>>>";
+
+  string line;
+  getline( cin, line );
+
+  return line;
+
+}
+
 vector<string>* DeckOfCards::getDeck(){ return _cards_ptr; }
 
 tuple<unsigned int,unsigned int> DeckOfCards::getDeckStats(){
-  return std::make_tuple(_numDecks,_cardsPerDeck);
+  return make_tuple(_numDecks,_cardsPerDeck);
 }
 

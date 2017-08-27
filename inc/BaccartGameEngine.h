@@ -1,16 +1,18 @@
-#include <vector>
-#include <string>
+
 #include <map>
-#include <utility>
 
 #include "DeckOfCards.h"
+
+using namespace std;
 
 class BaccartGameEngine{
 
  public: // Interace //
   
   //constructors
-  BaccartGameEngine( DeckOfCards cards, bool developerMode );
+  BaccartGameEngine( DeckOfCards cards, 
+		     bool developerMode = false, 
+		     bool testRulesMode = false );
 
   //methods
   void initialize();
@@ -29,19 +31,19 @@ protected:
 
   // members
   DeckOfCards _cards;
-  std::map<char,int> _cardValues;
+  map<char,int> _cardValues;
   bool _developerMode;
+  bool _testRulesMode;
   bool _isGameOver = false;
 
-  std::vector<char> _player;
-  std::vector<char> _banker;
+  vector<char> _player;
+  vector<char> _banker;
   
   //methods
   unsigned int evaluateCard(char card);
-  std::string compareHands(std::vector<char>, std::vector<char>);
-  int evaluateHand(std::vector<char>);
+  int evaluateHand(vector<char>);
   void applyRules();
-  bool advancedBankerDessicion(std::pair<int, unsigned int>);
+  bool advancedBankerDessicion(pair<int, unsigned int>);
   void prepNewGame();
 
 };
