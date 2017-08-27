@@ -8,15 +8,13 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char *argv[])
 {
 
-  // Configuration
-  // TODO:: Make these into comand line arguments.
+  // Parse cmd args and configure
   unsigned int nDecks = 1;
-  bool developerMode = true; // if true here you get more info throught the game.
-  bool testRulesMode = false; // if true you get to choose cards that card drawn 
-                              // useful for cheking the rules of the game
+  bool testRulesMode = false; // choose cards that are drawn useful when cheking the rules
+  bool developerMode = ( argc>1 and argv[1]!=NULL ) ? static_cast<string>(argv[1])=="-d" : false; //  more info throught the game.
 
   //Initialize game
   cout<<"\n Initalizing Game (Get excited)!! \n"<<endl;
@@ -25,7 +23,7 @@ int main()
 
   BaccartGameEngine gameEngine(deckofcards,developerMode,testRulesMode);
 
-  //Start Game
+  //Begin Game
   cout<<"\n-------------------------------"
       <<"\n----- Awesome Baccrat Game ----"
       <<"\n-------------------------------\n"<<std::endl;
@@ -40,7 +38,7 @@ int main()
 
     gameEngine.playBaccart();
 
-    cout<<"\n Player Hand: ";
+    cout<<"\n Player Hand: "; 
     gameEngine.showPlayerHand();
     cout<<"  sum = "<<gameEngine.getPlayerSum();
 
@@ -56,17 +54,13 @@ int main()
     std::getline( std::cin, line );
 
     cnt +=1;
+  // Game over
   
   }
-
-// Game over
-
-
   return 0;
-
 }
 
 
 // TODO::
 // use const in some declarations that makes sence.
-// Check better if it is indeed random over time, do histograms etc...
+// Check better if it is rng engine is indeed random over time, do histograms etc...
