@@ -1,4 +1,5 @@
-
+// Author: Vasilis Syropoulos (vsyropou5@gmail.com)
+// Coding Exercise for the Math Analyst vacancy
 
 #include "../inc/BaccartGameEngine.h"
 
@@ -42,6 +43,8 @@ void BaccartGameEngine::initialize(){
   cout<<"\n Game initialization sucessfull: ("
 	   <<get<0>(dstats)<<" decks and "<<get<1>(dstats)
 	   << " cards per deck)\n"<<endl;
+
+  if ( _developerMode ) {dumpCardValues();}
 
 }
 

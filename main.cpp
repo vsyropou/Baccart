@@ -1,7 +1,6 @@
+// Author: Vasilis Syropoulos (vsyropou5@gmail.com)
+// Coding Exercise for the Math Analyst vacancy
 
-// from std
-#include <iostream>
-#include <string.h>
 
 // local
 #include "inc/DeckOfCards.h"
@@ -15,7 +14,7 @@ int main()
   // Configuration
   // TODO:: Make these into comand line arguments.
   unsigned int nDecks = 1;
-  bool developerMode = true; // here you get more info throught the game.
+  bool developerMode = true; // if true here you get more info throught the game.
   bool testRulesMode = false; // if true you get to choose cards that card drawn 
                               // useful for cheking the rules of the game
 
@@ -26,17 +25,15 @@ int main()
 
   BaccartGameEngine gameEngine(deckofcards,developerMode,testRulesMode);
 
-    if ( developerMode ) {gameEngine.dumpCardValues();}
-
   //Start Game
-    cout<<"\n Press enter to start game.\n>>>";
-  std::string line;
-  std::getline( std::cin, line );
-  unsigned int cnt = 1;
+  cout<<"\n-------------------------------"
+      <<"\n----- Awesome Baccrat Game ----"
+      <<"\n-------------------------------\n"<<std::endl;
 
-  std::cout<<"\n-----------------------------"
-	   <<"\n----- Begin Baccrat Game ----"
-	   <<"\n-----------------------------\n"<<std::endl;
+  cout<<"\n Press enter to start game.\n>>>";
+  string line;
+  getline( cin, line );
+  unsigned int cnt = 1;
 
   while( line.empty() ){
     cout<<"\n --- Game number "<<cnt<<" ---"<<endl;
@@ -71,7 +68,5 @@ int main()
 
 
 // TODO::
-
 // use const in some declarations that makes sence.
 // Check better if it is indeed random over time, do histograms etc...
-// use namepsaces in GameEngin and remove all the std::

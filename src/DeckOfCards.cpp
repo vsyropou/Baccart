@@ -1,3 +1,5 @@
+// Author: Vasilis Syropoulos (vsyropou5@gmail.com)
+// Coding Exercise for the Math Analyst vacancy
 
 #include <tuple>
 
