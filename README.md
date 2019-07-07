@@ -1,4 +1,4 @@
-Baccart Exercise for the Math Analyst vacancy at GLI.
+Baccart Exercise for Math Analyst vacancy
 
 The code simulates the Baccart game.
 
